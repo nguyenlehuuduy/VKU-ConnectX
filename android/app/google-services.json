@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "953664338929",
+    "project_id": "vku-connect-x",
+    "storage_bucket": "vku-connect-x.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:953664338929:android:1bfc63eadf69bd265a2250",
+        "android_client_info": {
+          "package_name": "com.example.vku_connectx"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCm-e5D688qDMb6v_56T0DasHd765hkpC0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

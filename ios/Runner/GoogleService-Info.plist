@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyAAnNoWexU7erp0Z0yVF0shEUnuV-b2ofc</string>
+	<key>GCM_SENDER_ID</key>
+	<string>953664338929</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.vkuConnectx</string>
+	<key>PROJECT_ID</key>
+	<string>vku-connect-x</string>
+	<key>STORAGE_BUCKET</key>
+	<string>vku-connect-x.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:953664338929:ios:06ed8ac3aafe8f455a2250</string>
+</dict>
+</plist>
