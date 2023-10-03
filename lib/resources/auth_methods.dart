@@ -1,9 +1,10 @@
 import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:vku_connectx/models/user.dart' as model;
 import 'package:vku_connectx/resources/storage_methods.dart';
-
+import 'package:fluttertoast/fluttertoast.dart';
 class AuthMethods {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -17,9 +18,6 @@ class AuthMethods {
 
     return model.User.fromSnap(documentSnapshot);
   }
-
-  // Signing Up User
-
   Future<String> signUpUser({
     required String email,
     required String password,
@@ -29,39 +27,54 @@ class AuthMethods {
   }) async {
     String res = "Some error Occurred";
     try {
-      if (email.isNotEmpty ||
-          password.isNotEmpty ||
-          username.isNotEmpty ||
-          bio.isNotEmpty ||
+      if (email.isNotEmpty &&
+          password.isNotEmpty &&
+          username.isNotEmpty &&
+          bio.isNotEmpty &&
           file != null) {
-        // registering user in auth with email and password
-        UserCredential cred = await _auth.createUserWithEmailAndPassword(
-          email: email,
-          password: password,
-        );
+        // Kiểm tra địa chỉ email có đúng đuôi "@vku.udn.vn" hay không
+        if (email.endsWith("@vku.udn.vn")) {
+          // Đúng địa chỉ email, tiến hành đăng ký
+          UserCredential cred = await _auth.createUserWithEmailAndPassword(
+            email: email,
+            password: password,
+          );
 
-        String photoUrl =
-        await StorageMethods().uploadImageToStorage('profilePics', file, false);
+          String photoUrl =
+          await StorageMethods().uploadImageToStorage('profilePics', file, false);
 
-        model.User user = model.User(
-          username: username,
-          uid: cred.user!.uid,
-          photoUrl: photoUrl,
-          email: email,
-          bio: bio,
-          followers: [],
-          following: [],
-        );
+          model.User user = model.User(
+            username: username,
+            uid: cred.user!.uid,
+            photoUrl: photoUrl,
+            email: email,
+            bio: bio,
+            followers: [],
+            following: [],
 
-        // adding user in our database
-        await _firestore
-            .collection("users")
-            .doc(cred.user!.uid)
-            .set(user.toJson());
+          );
 
-        res = "success";
+          // Thêm người dùng vào cơ sở dữ liệu của bạn
+          await _firestore
+              .collection("users")
+              .doc(cred.user!.uid)
+              .set(user.toJson());
+
+          res = "success";
+        } else {
+         // res = "Vui lòng sử dụng địa chỉ email có đuôi @vku.udn.vn";
+         Fluttertoast.showToast(
+             msg: "Vui lòng sử dụng địa chỉ email có đuôi @vku.udn.vn",
+             toastLength: Toast.LENGTH_SHORT,
+             gravity: ToastGravity.CENTER,
+             timeInSecForIosWeb: 1,
+             backgroundColor: Colors.red,
+             textColor: Colors.white,
+             fontSize: 16.0
+         );
+        }
       } else {
-        res = "Please enter all the fields";
+        res = "Vui lòng nhập đầy đủ thông tin";
       }
     } catch (err) {
       return err.toString();
